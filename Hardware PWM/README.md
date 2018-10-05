@@ -1,18 +1,48 @@
 # Hardware PWM
-Now that you have done the software version of PWM, now it is time to start leveraging the other features of these Timer Modules.
+Through out this lab, mulitple define statements and soource files were used. In order to more easily write codes and to keeo them organized. The MSP430G2553 and the MSP430FR2311 were used to complete the software decoudning portion of the code.
 
-## Task
-You need to replicate the same behavior as in the software PWM, only using the Timer Modules ability to directly output to a GPIO Pin instead of managing them in software. One way to thing about what should happen is that unless your are doing some other things in your code, your system should initialize, set the Timer Modules, and then turn off the CPU.
+# Functionality
+Two interrupts were used to in order to complete the hawrdware pusle wave modulation, timer1_A0 and port1. Where when the button is pressed the timer1_A0 enbles the interrupt and resets the timer itself. Port1 or the button interrput engages and toggles the LED, where each press of the button increases the brightness of the LED by 10%. When the LED is at max brightness the button will reset, or turn off, the LED.THe code will then continue. Source codes: LedSetup, ButtonSteup, DutyCyleSetup, and TimerA0Setup were ued.  
 
-## Deliverables
-You will need to have two folders in this repository, one for each of the processors that you used for this part of the lab. Remember to replace this README with your own.
+# Inputs/Ouputs
+## MSP403G2553
+### Inputs
+- #define LED0 BIT0
+- #define LED1 BIT6
+- #define LED_DIR P1DIR
+- #define LED_SEL P1SEL
+- #define LED_SEL2 P1SEL2
+- #define BUTTON BIT3
+- #define BTN_INT_EN P1IE
+- #define BTN_INT_EDGE P1IES
+- #define CLRFLG P1IFG
 
-### Hints
-Read up on the P1SEL registers as well as look at the Timer modules ability to multiplex.
 
-## Extra Work
-### Using ACLK
-Some of these microprocessors have a built in ACLK which is extremely slow compared to your up to 25MHz available on some of them. What is the overall impact on the system when using this clock? Can you actually use your PWM code with a clock that slow?
+- LEDSetup;
+- ButtonSetup;
+- TimerA0Setup;
+- DutyCycleSetup;
 
-### Ultra Low Power
-Using a combination of ACLK, Low Power Modes, and any other means you may deem necessary, optimize this PWM code to run at 50% duty cycle with a LED on the MSP430FR5994. In particular, time how long your code can run on the fully charged super capacitor. You do not need to worry about the button control in this case, and you will probably want to disable all the GPIO that you are not using (nudge, nudge, hint, hint).
+### Outputs
+#define LED_OUT P1OUT
+
+## MSP430FR2311
+### Inputs
+- #define LED0 BIT0
+- #define LED1 BIT0
+- #define LED_DIR P2DIR
+- #define PULL_UP P2REN
+- #define LED_SEL P2SEL0
+- #define LED_SEL2 P2SEL1
+- #define BUTTON BIT1
+- #define BTN_INT_EN P1IE
+- #define BTN_INT_EDGE P1IES
+- #define CLRFLG P1IFG
+
+- LEDSetup;
+- ButtonSetup;
+- TimerA0Setup;
+- DutyCycleSetup;
+
+### Outputs
+- #define LED_OUT P2OUT
