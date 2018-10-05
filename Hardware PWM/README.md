@@ -1,8 +1,8 @@
 # Hardware PWM
-Through out this lab, mulitple define statements and soource files were used. In order to more easily write codes and to keeo them organized. The MSP430G2553 and the MSP430FR2311 were used to complete the software decoudning portion of the code.
+Through out this lab, mulitple define statements and soource files were used. In order to more easily write codes and to keeo them organized. The MSP430G2553 and the MSP430FR2311 were used to complete the hardware pulse wave modulation portion of the code.
 
 # Functionality
-Two interrupts were used to in order to complete the hawrdware pusle wave modulation, timer1_A0 and port1. Where when the button is pressed the timer1_A0 enbles the interrupt and resets the timer itself. Port1 or the button interrput engages and toggles the LED, where each press of the button increases the brightness of the LED by 10%. When the LED is at max brightness the button will reset, or turn off, the LED.THe code will then continue. Source codes: LedSetup, ButtonSteup, DutyCyleSetup, and TimerA0Setup were ued.  
+Two interrupts were used to in order to complete the hawrdware pusle wave modulation, timer1_A0 (timer0_B0 for the FR2311) and port1. Where when the button is pressed the timer1_A0 enbles the interrupt and resets the timer itself. Port1 or the button interrput engages and toggles the LED, where each press of the button increases the brightness of the LED by 10%. When the LED is at max brightness the button will reset, or turn off, the LED.THe code will then continue. Source codes: LedSetup, ButtonSteup, DutyCyleSetup, and TimerA0Setup were ued.  
 
 # Inputs/Ouputs
 ## MSP403G2553
