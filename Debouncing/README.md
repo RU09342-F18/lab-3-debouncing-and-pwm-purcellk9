@@ -2,7 +2,7 @@
 Through out this lab, mulitple define statements and soource files were used. In order to more easily write codes and to keeo them organized. The MSP430G2553 and the MSP432PR401R were used to complete the software decoudning portion of the code.
 
 # Functionality
-Two interrupts were used to in order to complete the decouncing , timerA1 and port1. Where when the button is pressed the timerA1 enbles the interrupt and resets the timer itself. Port1 or the button interrput engages and toggles the LED. Source codes: LedSetup, ButtonSteup, DutyCyleSetup, and TimerA0Setup were ued.  
+Two interrupts were used to in order to complete the decouncing , timer1_A0 and port1. Where when the button is pressed the timer1_A0 enbles the interrupt and resets the timer itself. Port1 or the button interrput engages and toggles the LED. Source codes: LedSetup, ButtonSteup, DutyCyleSetup, and TimerA0Setup were ued.  
 
 # Inputs/Ouputs
 ## MSP403G2553
