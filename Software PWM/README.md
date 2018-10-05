@@ -1,33 +1,50 @@
 # Software PWM
-Most microprocessors will have a Timer module, but depending on the device, some may not come with pre-built PWM modules. Instead, you may have to utilize software techniques to synthesize PWM on your own.
+Through out this lab, mulitple define statements and soource files were used. In order to more easily write codes and to keeo them organized. The MSP430G2553 and the MSP430F5529 were used to complete the software pulse wave modulation portion of the code.
 
-## Task
-You need to generate a 1kHz PWM signal with a duty cycle between 0% and 100%. Upon the processor starting up, you should PWM one of the on-board LEDs at a 50% duty cycle. Upon pressing one of the on-board buttons, the duty cycle of the LED should increase by 10%. Once you have reached 100%, your duty cycle should go back to 0% on the next button press. You also need to implement the other LED to light up when the Duty Cycle button is depressed and turns back off when it is let go. This is to help you figure out if the button has triggered multiple interrupts.
+# Functionality
+Four interrupts were used to in order to complete the software pusle wave modulation, timer0_A0, timer0_A1, timer1_A0, and port1. Where when timer1_A0 Deals with slight button bounce issue while also turning off the light after a set time. Port1 enbles the interrupt and resets the timer itself. Port1 or the button interrput engages and toggles the LED, where each press of the button increases the brightness of the LED by 10%. When the LED is at max brightness the button will reset, or turn off. Timer0_A1 disables the LED once the time has reached the duty cycle %. Timer0_A0 re-enables the LED at the end of the cycle the LED. Source codes: LedSetup, ButtonSteup, DutyCyleSetup, and TimerA0Setup were ued.  
 
-## Deliverables
-You will need to have two folders in this repository, one for each of the processors that you used for this part of the lab. Remember to replace this README with your own.
+# Inputs/Ouputs
+## MSP403G2553
+### Inputs
+- #define LED0 BIT0
+- #define LED1 BIT6
+- #define LED_DIR P1DIR
+- #define LED_SEL P1SEL
+- #define LED_SEL2 P1SEL2
+- #define BUTTON BIT3
+- #define BTN_INT_EN P1IE
+- #define BTN_INT_EDGE P1IES
+- #define CLRFLG P1IFG
 
-### Hints
-You really, really, really, really need to hook up the output of your LED pin to an oscilloscope to make sure that the duty cycle is accurate. Also, since you are going to be doing a lot of initialization, it would be helpful for all persons involved if you created your main function like:
+- LEDSetup;
+- ButtonSetup;
+- TimerA0Setup;
+- TimerA1Setup;
+- DutyCycleSetup;
 
-```c
-int main(void)
-{
-	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
-	LEDSetup(); // Initialize our LEDS
-	ButtonSetup();  // Initialize our button
-	TimerA0Setup(); // Initialize Timer0
-	TimerA1Setup(); // Initialize Timer1
-	__bis_SR_register(LPM0_bits + GIE);       // Enter LPM0 w/ interrupt
-}
-```
+### Outputs
+- #define LED_OUT P1OUT
 
-This way, each of the steps in initialization can be isolated for easier understanding and debugging.
+## MSP430F5529
+### Inputs
+- #define LED0 BIT0
+- #define LED1 BIT7
+- #define LED_DIR P1DIR
+- #define PULL_UP P1REN
+- #define LED_SEL P1SEL
+- #define LED_SEL2 P1SEL2
+- #define BUTTON BIT1
+- #define BTN_INT_EN P1IE
+- #define BTN_INT_EDGE P1IES
+- #define CLRFLG P1IFG
 
+- LEDSetup;
+- ButtonSetup;
+- TimerA0Setup;
+- TimerA1Setup;
+- DutyCycleSetup;
 
-## Extra Work
-### Linear Brightness
-Much like every other things with humans, not everything we interact with we perceive as linear. For senses such as sight or hearing, certain features such as volume or brightness have a logarithmic relationship with our senses. Instead of just incrementing by 10%, try making the brightness appear to change linearly.
-
-### Power Comparison
-Since you are effectively turning the LED off for some period of time, it should follow that the amount of power you are using over time should be less. Using Energy Trace, compare the power consumption of the different duty cycles. What happens if you use the pre-divider in the timer module for the PWM (does it consume less power)?
+### Outputs
+- #define LED_OUT P1OUT
+- #define LED_OUT4 P4OUT
